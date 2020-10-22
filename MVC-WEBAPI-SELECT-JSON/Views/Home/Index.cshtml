@@ -1,0 +1,31 @@
+﻿<h2>EMPLOYEE SELECT WEBAPI USING JSON</h2>
+
+<table id="mytable" class="table">
+    <tr>
+        <th>
+            EMPLOYEE NAME
+        </th>
+        <th>
+            EMPLOYEE SURNAME
+        </th>
+        <th>
+            EMPLOYEE AGE
+        </th>
+        <th>
+            EMPLOYEE MAIL
+        </th>
+    </tr>
+</table>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var html = [];
+        $.getJSON("http://localhost:49622/api/EmployeeAPI", function (data) {
+            $.each(data, function (key, value) {
+                html.push("<tr> <td>" + value.EMPLOYEENAME + "</td><td>" + value.EMPLOYEESURNAME + "</td><td>" + value.EMPLOYEEAGE + "</td><td>" + value.EMPLOYEEMAIL + "</td></tr>");
+                $('#mytable').append(html);
+            });
+        });
+    })
+</script>
