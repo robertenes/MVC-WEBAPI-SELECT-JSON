@@ -1,5 +1,5 @@
 ﻿<h2>EMPLOYEE SELECT WEBAPI USING JSON</h2>
-
+<center> SEARCH: <input type="text" id="EmployeeTextBox" name="Employee" placeholder="Search..."  /> </center>
 <table id="mytable" class="table">
     <tr>
         <th>
@@ -19,6 +19,32 @@
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
+    //TABLE SEARCH 1 SECTION
+    $("#EmployeeTextBox").on("keyup", function () {
+        var searchTemp = $(this).val();
+        $("table tr").each(function (result) {
+            if (result !== 0) {
+                var id = $(this).find("td:nth-child(1)").text();
+                if (id.indexOf(searchTemp) !== 0 && id.toLowerCase().indexOf(searchTemp.toLowerCase()) < 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            }
+        });
+    });
+    //TABLE SEARCH 2 SECTION
+    /*
+      $(document).ready(function(){
+  $("#EmployeeTextBox").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#mytable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+      */
     $(document).ready(function () {
         var html = [];
         $.getJSON("http://localhost:49622/api/EmployeeAPI", function (data) {
